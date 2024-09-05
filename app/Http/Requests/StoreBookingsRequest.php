@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreBookingsRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreBookingsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +24,11 @@ class StoreBookingsRequest extends FormRequest
     {
         return [
             //
+            'tour_id' => ['required', 'numeric'],
+            'user_id' => ['required', 'numeric'],
+            'status' => ['required', Rule::in(['pending'])],
+            'reservation_date' => ['required', 'date'],
+            'number_of_people' => ['required', 'numeric'],
         ];
     }
 }

@@ -72,4 +72,9 @@ class UsersController extends Controller
     {
         //
     }
+
+    public function bookings(User $user)
+    {
+        return $user->bookings;
+    }
 }

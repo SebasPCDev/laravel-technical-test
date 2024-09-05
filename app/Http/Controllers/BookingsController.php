@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBookingsRequest;
 use App\Http\Requests\UpdateBookingsRequest;
 use App\Http\Resources\BookingCollection;
+use App\Http\Resources\BookingResource;
 use App\Models\Booking;
 
 class BookingsController extends Controller
@@ -33,6 +34,7 @@ class BookingsController extends Controller
     public function store(StoreBookingsRequest $request)
     {
         //
+        return new BookingResource(Booking :: create($request->all()));
     }
 
     /**
@@ -41,6 +43,7 @@ class BookingsController extends Controller
     public function show(Booking $bookings)
     {
         //
+
     }
 
     /**

@@ -14,9 +14,9 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers'], function
     Route::apiResource('tours', ToursController::class);
     Route::apiResource('bookings', BookingsController::class);
     Route::apiResource('users', UsersController::class);
-
-
+    Route::get('/users/{user}/bookings', [UsersController::class, 'bookings']);
 });
+
 
 // Route::post('login', 'App\Http\Controllers\AuthController@login');
 // Route::post('register', 'App\Http\Controllers\AuthController@register');
