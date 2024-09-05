@@ -11,7 +11,7 @@ class UpdateToursRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,36 @@ class UpdateToursRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if($method === 'PUT') {
+            return [
+                'title' => ['string'],
+                'description' => ['string'],
+                'price' => ['numeric'],
+                'location' => ['string'],
+                'start_date' => ['date'],
+                'end_date' => ['date', 'after:start_date'],
+            ];
+        }else{
+            return [
+                'title' => ['sometimes','string'],
+                'description' => ['sometimes','string'],
+                'price' => ['sometimes','numeric'],
+                'location' => ['sometimes','string'],
+                'start_date' => ['sometimes','date'],
+                'end_date' => ['sometimes','date', 'after:start_date'],
+            ];
+
+        }
+    }
+
+    protected function prepareForValidation()
+    {
+        if($this->price){
+            $this->merge([
+                'price' => (int) $this->price * 100,
+            ]);
+        }
+
     }
 }

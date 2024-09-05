@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Tour;
 use App\Models\User;
+use App\Models\Users;
 use Illuminate\Auth\Access\Response;
 
-class ToursPolicy
+class UsersPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class ToursPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Tour $tours): bool
+    public function view(User $user, Users $users): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class ToursPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Tour $tours): bool
+    public function update(User $user, Users $users): bool
     {
         //
     }
@@ -43,7 +43,7 @@ class ToursPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Tour $tours): bool
+    public function delete(User $user, Users $users): bool
     {
         //
     }
@@ -51,7 +51,7 @@ class ToursPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Tour $tours): bool
+    public function restore(User $user, Users $users): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class ToursPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Tour $tours): bool
+    public function forceDelete(User $user, Users $users): bool
     {
         //
     }

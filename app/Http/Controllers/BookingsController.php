@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBookingsRequest;
 use App\Http\Requests\UpdateBookingsRequest;
-use App\Models\Bookings;
+use App\Http\Resources\BookingCollection;
+use App\Models\Booking;
 
 class BookingsController extends Controller
 {
@@ -14,6 +15,8 @@ class BookingsController extends Controller
     public function index()
     {
         //
+        $bookings = Booking::paginate();
+        return new BookingCollection($bookings);
     }
 
     /**
@@ -35,7 +38,7 @@ class BookingsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Bookings $bookings)
+    public function show(Booking $bookings)
     {
         //
     }
@@ -43,7 +46,7 @@ class BookingsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Bookings $bookings)
+    public function edit(Booking $bookings)
     {
         //
     }
@@ -51,7 +54,7 @@ class BookingsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBookingsRequest $request, Bookings $bookings)
+    public function update(UpdateBookingsRequest $request, Booking $bookings)
     {
         //
     }
@@ -59,7 +62,7 @@ class BookingsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Bookings $bookings)
+    public function destroy(Booking $bookings)
     {
         //
     }

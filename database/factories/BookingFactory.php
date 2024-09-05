@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\Tours;
+use App\Models\Tour;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Bookings>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Booking>
  */
-class BookingsFactory extends Factory
+class BookingFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,7 +22,7 @@ class BookingsFactory extends Factory
 
         return [
             'user_id' => User::factory(),
-            'tour_id' => Tours::factory(),
+            'tour_id' => Tour::factory(),
             'status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
             'reservation_date' => $this->faker->dateTime(),
             'number_of_people' => $this->faker->numberBetween(1, 5),

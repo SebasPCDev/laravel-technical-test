@@ -6,10 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Tours extends Model
+class Tour extends Model
 {
     use HasFactory;
-    protected $fillable = [];
+    protected $fillable = [
+        'title',
+        'description',
+        'price',
+        'location',
+        'start_date',
+        'end_date',
+    ];
 
     /**
      * Get all of the  for the Tours
@@ -18,6 +25,6 @@ class Tours extends Model
      */
     public function bookings(): HasMany
     {
-        return $this->hasMany(Bookings::class);
+        return $this->hasMany(Booking::class);
     }
 }

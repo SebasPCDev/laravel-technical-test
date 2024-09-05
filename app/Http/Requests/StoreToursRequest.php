@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class StoreToursRequest extends FormRequest
 {
     /**
@@ -11,7 +12,7 @@ class StoreToursRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +24,20 @@ class StoreToursRequest extends FormRequest
     {
         return [
             //
+            'title' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'price' => ['required', 'numeric'],
+            'location' => ['required', 'string'],
+            'start_date' => ['required', 'date'],
+            'end_date' => ['required', 'date', 'after:start_date'],
+
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'price' => (int) $this->price * 100,
+        ]);
     }
 }

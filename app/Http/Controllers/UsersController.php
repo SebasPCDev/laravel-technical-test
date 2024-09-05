@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreToursRequest;
-use App\Http\Requests\UpdateToursRequest;
-use App\Http\Resources\TourCollection;
-use App\Http\Resources\TourResource;
-use App\Models\Tour;
+use App\Http\Requests\StoreUsersRequest;
+use App\Http\Requests\UpdateUsersRequest;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
+use App\Models\User;
+use Illuminate\Http\Request;
 
-class ToursController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +17,9 @@ class ToursController extends Controller
     public function index()
     {
         //
-        $tours = Tour::paginate();
-        return new TourCollection($tours);
+        $users = User::all();
+
+        return new UserCollection($users->load('bookings'));
     }
 
     /**
@@ -31,27 +33,26 @@ class ToursController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreToursRequest $request)
+    public function store(StoreUsersRequest $request)
     {
         //
-        return new TourResource(Tour::create($request->all()));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Tour $tour)
+    public function show(User $user)
     {
 
         //
-        return new TourResource($tour);
+        return new UserResource($user);
 
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tour $tours)
+    public function edit(User $users)
     {
         //
     }
@@ -59,19 +60,16 @@ class ToursController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateToursRequest $request, Tour $tour)
+    public function update(UpdateUsersRequest $request, User $users)
     {
         //
-        $tour->update($request->all());
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tour $tour)
+    public function destroy(User $users)
     {
         //
-        $tour->delete();
-
     }
 }
