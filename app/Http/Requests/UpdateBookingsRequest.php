@@ -11,7 +11,7 @@ class UpdateBookingsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,23 @@ class UpdateBookingsRequest extends FormRequest
      */
     public function rules(): array
     {
+        $method = $this->method();
+        if ($method === 'PUT') {
+            return [
+                'status' => ['string', 'in:pending,approved,cancelled'],
+            ];
+        } else {
+            return [
+                'status' => ['sometimes', 'string', 'in:pending,confirmed,cancelled'],
+            ];
+        }
+
+    }
+
+    public function messages(): array
+    {
         return [
-            //
+            'status.in' => 'El estado de la reserva debe ser "pending", "confirmed" o "cancelled".',
         ];
     }
 }

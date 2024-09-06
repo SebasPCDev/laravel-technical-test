@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateToursRequest;
 use App\Http\Resources\TourCollection;
 use App\Http\Resources\TourResource;
 use App\Models\Tour;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ToursController extends Controller
 {
@@ -46,6 +47,7 @@ class ToursController extends Controller
         //
         return new TourResource($tour);
 
+
     }
 
     /**
@@ -62,7 +64,7 @@ class ToursController extends Controller
     public function update(UpdateToursRequest $request, Tour $tour)
     {
         //
-        $tour->update($request->all());
+        return $tour->update($request->all());
     }
 
     /**
@@ -70,8 +72,16 @@ class ToursController extends Controller
      */
     public function destroy(Tour $tour)
     {
-        //
-        $tour->delete();
+        try {
+            $tour->delete();
+            return response()->json([
+                'message' => 'Tour deleted',
+                'status' => 204,
+            ], 204);
+        } catch (ModelNotFoundException $e) {
+            return $e->getMessage();
+        }
+
 
     }
 }

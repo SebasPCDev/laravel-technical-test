@@ -14,6 +14,7 @@ class TourResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -25,4 +26,8 @@ class TourResource extends JsonResource
             'bookings' => new BookingCollection($this->bookings),
         ];
     }
+
+
+
+
 }

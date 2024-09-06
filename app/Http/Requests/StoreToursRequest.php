@@ -23,21 +23,43 @@ class StoreToursRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
-            'title' => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'price' => ['required', 'numeric'],
-            'location' => ['required', 'string'],
-            'start_date' => ['required', 'date'],
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'min:50'],
+            'price' => ['required', 'numeric', 'min:0'],
+            'location' => ['required', 'string', 'max:255'],
+            'start_date' => ['required', 'date', 'after_or_equal:today'],
             'end_date' => ['required', 'date', 'after:start_date'],
+        ];
 
+    }
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'El título es obligatorio.',
+            'title.max' => 'El título no puede exceder 255 caracteres.',
+            'description.required' => 'La descripción es obligatoria.',
+            'description.min' => 'La descripción debe tener al menos 50 caracteres.',
+            'price.required' => 'El precio es obligatorio.',
+            'price.numeric' => 'El precio debe ser un número.',
+            'price.min' => 'El precio no puede ser negativo.',
+            'location.required' => 'La ubicación es obligatoria.',
+            'location.max' => 'La ubicación no puede exceder 255 caracteres.',
+            'start_date.required' => 'La fecha de inicio es obligatoria.',
+            'start_date.date' => 'La fecha de inicio debe ser una fecha válida.',
+            'start_date.after_or_equal' => 'La fecha de inicio no puede ser anterior a hoy.',
+            'end_date.required' => 'La fecha de finalización es obligatoria.',
+            'end_date.date' => 'La fecha de finalización debe ser una fecha válida.',
+            'end_date.after' => 'La fecha de finalización debe ser posterior a la fecha de inicio.',
         ];
     }
 
-    protected function prepareForValidation()
+    public function prepareForValidation()
     {
         $this->merge([
-            'price' => (int) $this->price * 100,
+            'price' => (int) $this->price,
+            'start_date' => date('Y-m-d', strtotime($this->start_date)),
+            'end_date' => date('Y-m-d', strtotime($this->end_date)),
         ]);
     }
+
 }

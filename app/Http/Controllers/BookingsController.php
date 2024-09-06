@@ -34,7 +34,7 @@ class BookingsController extends Controller
     public function store(StoreBookingsRequest $request)
     {
         //
-        return new BookingResource(Booking :: create($request->all()));
+        return new BookingResource(Booking::create($request->all()));
     }
 
     /**
@@ -57,9 +57,12 @@ class BookingsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBookingsRequest $request, Booking $bookings)
+    public function update(UpdateBookingsRequest $request, Booking $booking)
     {
         //
+
+        return $booking->update($request->all());
+
     }
 
     /**

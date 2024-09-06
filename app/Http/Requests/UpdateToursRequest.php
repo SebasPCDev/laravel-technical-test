@@ -22,35 +22,54 @@ class UpdateToursRequest extends FormRequest
     public function rules(): array
     {
         $method = $this->method();
-        if($method === 'PUT') {
+        if ($method === 'PUT') {
             return [
-                'title' => ['string'],
-                'description' => ['string'],
-                'price' => ['numeric'],
-                'location' => ['string'],
-                'start_date' => ['date'],
+                'title' => ['string', 'max:255'],
+                'description' => ['string', 'min:50'],
+                'price' => ['numeric', 'min:0'],
+                'location' => ['string', 'max:255'],
+                'start_date' => ['date', 'after_or_equal:today'],
                 'end_date' => ['date', 'after:start_date'],
             ];
-        }else{
+        } else {
             return [
-                'title' => ['sometimes','string'],
-                'description' => ['sometimes','string'],
-                'price' => ['sometimes','numeric'],
-                'location' => ['sometimes','string'],
-                'start_date' => ['sometimes','date'],
-                'end_date' => ['sometimes','date', 'after:start_date'],
+                'title' => ['sometimes', 'string'],
+                'description' => ['sometimes', 'string'],
+                'price' => ['sometimes', 'numeric'],
+                'location' => ['sometimes', 'string'],
+                'start_date' => ['sometimes', 'date'],
+                'end_date' => ['sometimes', 'date', 'after:start_date'],
             ];
 
         }
     }
 
-    protected function prepareForValidation()
+    public function messages(): array
     {
-        if($this->price){
-            $this->merge([
-                'price' => (int) $this->price * 100,
-            ]);
-        }
+        return [
+            'title.max' => 'El título no puede exceder 255 caracteres.',
 
+            'description.min' => 'La descripción debe tener al menos 50 caracteres.',
+
+            'price.numeric' => 'El precio debe ser un número.',
+            'price.min' => 'El precio no puede ser negativo.',
+
+            'location.max' => 'La ubicación no puede exceder 255 caracteres.',
+
+            'start_date.date' => 'La fecha de inicio debe ser una fecha válida.',
+            'start_date.after_or_equal' => 'La fecha de inicio no puede ser anterior a hoy.',
+
+            'end_date.date' => 'La fecha de finalización debe ser una fecha válida.',
+            'end_date.after' => 'La fecha de finalización debe ser posterior a la fecha de inicio.',
+        ];
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'price' => (int) $this->price,
+            'start_date' => date('Y-m-d', strtotime($this->start_date)),
+            'end_date' => date('Y-m-d', strtotime($this->end_date)),
+        ]);
     }
 }
