@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class UsersController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostrar todos los usuarios
      */
     public function index()
     {
@@ -31,7 +31,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Crear un nuevo usuario
      */
     public function store(StoreUsersRequest $request)
     {
@@ -39,7 +39,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Mostar un usuario específico
      */
     public function show(User $user)
     {
@@ -57,8 +57,9 @@ class UsersController extends Controller
         //
     }
 
+
     /**
-     * Update the specified resource in storage.
+     * Actualizar información de un usuario.
      */
     public function update(UpdateUsersRequest $request, User $users)
     {
@@ -66,12 +67,16 @@ class UsersController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Eliminar un usuario específico
      */
     public function destroy(User $users)
     {
         //
     }
+
+    /**
+     * Obtener las reservas de un usuario específico
+     */
 
     public function bookings(User $user)
     {

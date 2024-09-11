@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class ToursController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostrar todos los tours
      */
     public function index()
     {
@@ -30,7 +30,7 @@ class ToursController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guardar un nuevo tour
      */
     public function store(StoreToursRequest $request)
     {
@@ -39,7 +39,7 @@ class ToursController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Mostrar un tour específico
      */
     public function show(Tour $tour)
     {
@@ -59,7 +59,7 @@ class ToursController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualizar un tour específico
      */
     public function update(UpdateToursRequest $request, Tour $tour)
     {
@@ -68,7 +68,7 @@ class ToursController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Eliminar un tour en específico
      */
     public function destroy(Tour $tour)
     {

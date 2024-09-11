@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Booking;
 use App\Models\Tour;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,10 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        $this->call([
-            UserSeeder::class,
-            TourSeeder::class,
-            BookingSeeder::class,
-        ]);
+        User::factory(10)->create();
+        Tour::factory(10)->create();
+        Booking::factory(20)->create();
     }
 }

@@ -19,6 +19,7 @@ class TourFactory extends Factory
 
 
         return [
+            'id' => $this->faker->uuid(),
             'title' => $this->faker->name(),
             'description' => $this->faker->text(),
             'price' => $this->faker->randomFloat(2, 1, 1000),

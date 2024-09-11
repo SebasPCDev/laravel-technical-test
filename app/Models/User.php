@@ -4,13 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\UUID;
 
 class User extends Model
 {
-    use HasFactory;
+    use HasFactory, UUID;
 
     protected $fillable = [
-
+        'name',
+        'email',
+        'password',
     ];
 
     /**
@@ -20,7 +23,7 @@ class User extends Model
      */
     public function bookings()
     {
-        return $this->hasMany(Booking::class, 'user_id', 'id');
+        return $this->hasMany(Booking::class);
     }
 
 

@@ -21,8 +21,9 @@ class BookingFactory extends Factory
 
 
         return [
-            'user_id' => User::factory(),
-            'tour_id' => Tour::factory(),
+            'id' => $this->faker->uuid(),
+            'user_id' => User::inRandomOrder()->first()->id,
+            'tour_id' => Tour::inRandomOrder()->first()->id,
             'status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
             'reservation_date' => $this->faker->dateTime(),
             'number_of_people' => $this->faker->numberBetween(1, 5),

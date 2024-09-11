@@ -11,7 +11,7 @@ use App\Models\Booking;
 class BookingsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostrar todas las reservas
      */
     public function index()
     {
@@ -29,7 +29,7 @@ class BookingsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Crear una nueva reserva
      */
     public function store(StoreBookingsRequest $request)
     {
@@ -55,7 +55,7 @@ class BookingsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualizar información de la reserva
      */
     public function update(UpdateBookingsRequest $request, Booking $booking)
     {
@@ -66,7 +66,7 @@ class BookingsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Eliminar una reserva específica
      */
     public function destroy(Booking $bookings)
     {

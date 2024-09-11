@@ -23,8 +23,8 @@ class StoreBookingsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tour_id' => ['required', 'integer', 'exists:tours,id'],
-            'user_id' => ['required', 'integer', 'exists:users,id'],
+            'tour_id' => ['required', 'uuid', 'exists:tours,id'],
+            'user_id' => ['required', 'uuid', 'exists:users,id'],
             'status' => ['required', Rule::in(['pending', 'confirmed', 'cancelled'])],
             'reservation_date' => ['required', 'date', 'after_or_equal:today'],
             'number_of_people' => ['required', 'integer', 'min:1', 'max:10'],
@@ -36,11 +36,9 @@ class StoreBookingsRequest extends FormRequest
     {
         return [
             'tour_id.required' => 'El ID del tour es obligatorio.',
-            'tour_id.integer' => 'El ID del tour debe ser un número entero.',
             'tour_id.exists' => 'El tour seleccionado no es válido.',
 
             'user_id.required' => 'El ID del usuario es obligatorio.',
-            'user_id.integer' => 'El ID del usuario debe ser un número entero.',
             'user_id.exists' => 'El usuario seleccionado no es válido.',
 
             'status.required' => 'El estado de la reserva es obligatorio.',
