@@ -15,14 +15,14 @@ OJO: La aplicación fue desarrollada con las versiones de
 Clonamos el repositorio
 
 ```bash
-  git clone https://github.com/SebasPCDev/laravel-technical-test.git
+git clone https://github.com/SebasPCDev/laravel-technical-test.git
 ```
 
-### Instalación del Back
+### Instalación
 
 ```bash
-    cd laravel-technical-test
-    composer install
+cd laravel-technical-test
+composer install
 ```
 
 Luego de tener todas las dependencias instaladas, debe crear un archivo .env replicando el mismo formato de .env.example
