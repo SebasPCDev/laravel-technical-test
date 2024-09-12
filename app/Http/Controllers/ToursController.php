@@ -64,7 +64,12 @@ class ToursController extends Controller
     public function update(UpdateToursRequest $request, Tour $tour)
     {
         //
-        return $tour->update($request->all());
+
+
+        $tour->update($request->all());
+
+        $tourUpdated = $this->show($tour);
+        return $tourUpdated;
     }
 
     /**

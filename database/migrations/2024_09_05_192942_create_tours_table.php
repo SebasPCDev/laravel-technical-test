@@ -16,8 +16,6 @@ return new class extends Migration {
             $table->string('description');
             $table->string('price');
             $table->string('location');
-            $table->string('start_date');
-            $table->string('end_date');
             $table->timestamps();
         });
     }

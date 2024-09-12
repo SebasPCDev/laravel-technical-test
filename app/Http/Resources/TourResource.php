@@ -21,9 +21,9 @@ class TourResource extends JsonResource
             'description' => $this->description,
             'price' => $this->price,
             'location' => $this->location,
+            'bookings' => new BookingCollection($this->bookings),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'bookings' => new BookingCollection($this->bookings),
         ];
     }
 

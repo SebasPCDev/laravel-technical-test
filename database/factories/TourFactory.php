@@ -24,8 +24,7 @@ class TourFactory extends Factory
             'description' => $this->faker->text(),
             'price' => $this->faker->randomFloat(2, 1, 1000),
             'location' => $this->faker->city(),
-            'start_date' => $this->faker->dateTime(),
-            'end_date' => $this->faker->dateTime(),
+
         ];
     }
 }

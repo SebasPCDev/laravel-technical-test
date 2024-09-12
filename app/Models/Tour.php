@@ -15,8 +15,6 @@ class Tour extends Model
         'description',
         'price',
         'location',
-        'start_date',
-        'end_date',
     ];
 
     /**

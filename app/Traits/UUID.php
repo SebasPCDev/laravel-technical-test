@@ -22,6 +22,11 @@ trait UUID
                 $model->setAttribute($model->getKeyName(), Str::uuid()->toString());
             }
         });
+
+
+        static::deleting(function ($tour) {
+            $tour->bookings()->delete();
+        });
     }
 
     // Tells the database not to auto-increment this field

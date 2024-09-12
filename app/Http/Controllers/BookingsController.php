@@ -34,6 +34,7 @@ class BookingsController extends Controller
     public function store(StoreBookingsRequest $request)
     {
         //
+        dd($request->all());
         return new BookingResource(Booking::create($request->all()));
     }
 
