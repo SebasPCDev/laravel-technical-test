@@ -25,7 +25,7 @@ class StoreBookingsRequest extends FormRequest
         return [
             'tour_id' => ['required', 'uuid', 'exists:tours,id'],
             'user_id' => ['required', 'uuid', 'exists:users,id'],
-            'status' => ['required', Rule::in(['pending', 'confirmed', 'cancelled'])],
+            'status' => ['required', Rule::in(['pending'])],
             'reservation_date' => ['required', 'date', 'after_or_equal:today'],
             'number_of_people' => ['required', 'integer', 'min:1', 'max:10'],
         ];
@@ -37,12 +37,14 @@ class StoreBookingsRequest extends FormRequest
         return [
             'tour_id.required' => 'El ID del tour es obligatorio.',
             'tour_id.exists' => 'El tour seleccionado no es válido.',
+            'tour_id.uuid' => 'El id del tour es obligatorio y debe ser un UUID válido.',
 
             'user_id.required' => 'El ID del usuario es obligatorio.',
             'user_id.exists' => 'El usuario seleccionado no es válido.',
+            'user_id.uuid' => 'El id del usuario es obligatorio y debe ser un UUID válido.',
 
             'status.required' => 'El estado de la reserva es obligatorio.',
-            'status.in' => 'El estado de la reserva debe ser "pending", "confirmed" o "cancelled".',
+            'status.in' => 'El estado de la reserva debe ser pending.',
 
             'reservation_date.required' => 'La fecha de reserva es obligatoria.',
             'reservation_date.date' => 'La fecha de reserva no es válida.',
@@ -55,20 +57,7 @@ class StoreBookingsRequest extends FormRequest
         ];
     }
 
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'tour_id' => (int) $this->tour_id,
-            'user_id' => (int) $this->user_id,
-            'number_of_people' => (int) $this->number_of_people,
-            'reservation_date' => $this->formatDate($this->reservation_date),
-        ]);
-    }
 
-    private function formatDate($date)
-    {
-        return date('Y-m-d', strtotime($date));
-    }
 
 
 }

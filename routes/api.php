@@ -17,7 +17,3 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers'], function
     Route::get('/users/{user}/bookings', [UsersController::class, 'bookings']);
 });
 
-
-// Route::post('login', 'App\Http\Controllers\AuthController@login');
-// Route::post('register', 'App\Http\Controllers\AuthController@register');
-// Route::post('logout', 'App\Http\Controllers\AuthController@logout');

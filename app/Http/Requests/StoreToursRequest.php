@@ -26,9 +26,8 @@ class StoreToursRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'min:50'],
             'price' => ['required', 'numeric', 'min:0'],
-            'location' => ['required', 'string', 'max:255'],
-            'start_date' => ['required', 'date', 'after_or_equal:today'],
-            'end_date' => ['required', 'date', 'after:start_date'],
+            'location' => ['required', 'string', 'max:255', 'min:5'],
+
         ];
 
     }
@@ -44,22 +43,9 @@ class StoreToursRequest extends FormRequest
             'price.min' => 'El precio no puede ser negativo.',
             'location.required' => 'La ubicación es obligatoria.',
             'location.max' => 'La ubicación no puede exceder 255 caracteres.',
-            'start_date.required' => 'La fecha de inicio es obligatoria.',
-            'start_date.date' => 'La fecha de inicio debe ser una fecha válida.',
-            'start_date.after_or_equal' => 'La fecha de inicio no puede ser anterior a hoy.',
-            'end_date.required' => 'La fecha de finalización es obligatoria.',
-            'end_date.date' => 'La fecha de finalización debe ser una fecha válida.',
-            'end_date.after' => 'La fecha de finalización debe ser posterior a la fecha de inicio.',
         ];
     }
 
-    public function prepareForValidation()
-    {
-        $this->merge([
-            'price' => (int) $this->price,
-            'start_date' => date('Y-m-d', strtotime($this->start_date)),
-            'end_date' => date('Y-m-d', strtotime($this->end_date)),
-        ]);
-    }
+
 
 }
